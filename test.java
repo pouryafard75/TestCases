@@ -1,8 +1,9 @@
 public class test {
-    public static void main(String[] args) {
-        System.out.println(10/2);
+    public static void printAvg(int sum, int count){
+        System.out.println(sum / count);
     }
-    public static void printAvg(int sum, int count) {
-        //Todo:
+    public static void main(String[] args) {
+        printAvg(10,2);
     }
 }
+
