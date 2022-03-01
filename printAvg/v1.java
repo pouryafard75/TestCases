@@ -6,4 +6,4 @@ public class v1 {
     public static void printAvg(int sum, int count) {
         //Todo:
     }
-}
+}   
