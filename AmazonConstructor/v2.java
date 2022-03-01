@@ -1,4 +1,4 @@
-package AmazonConstructor;
+package amazonConstructor;
 public class AmazonElasticFileSystemAsyncClient extends
         AmazonElasticFileSystemClient implements AmazonElasticFileSystemAsync {
 
