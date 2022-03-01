@@ -1,3 +1,4 @@
+package newEX;
 public class PluginManager {
-    private boolean isInitialized;
+    protected HashMap<String, List<String>> urlMap = new HashMap<String, List<String>>();
 }
