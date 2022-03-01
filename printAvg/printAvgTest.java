@@ -1,5 +1,5 @@
 package printAvg;
-public class v1 {
+public class printAvg {
     public static void main(String[] args) {
         System.out.println(10/2);
     }
