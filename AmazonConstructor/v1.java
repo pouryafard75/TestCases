@@ -6,7 +6,6 @@ public class AmazonElasticFileSystemAsyncClient extends
             ExecutorService executorService) {
         this(awsCredentialsProvider, new ClientConfiguration(), executorService);
     }
-
     public AmazonElasticFileSystemAsyncClient(AWSCredentialsProvider awsCredentialsProvider,
             ClientConfiguration clientConfiguration) {
         this(awsCredentialsProvider, clientConfiguration,
