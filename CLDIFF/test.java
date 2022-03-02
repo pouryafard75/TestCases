@@ -4,9 +4,9 @@ public class ThreadPoolTaskScheduler extends ExecutorConfigurationSupport {
         ExecutorService executor = getScheduledExecutor();
         try {
 
-            ListenableFutureTask<Object> future = new ListenableFutureTask<>(task, null);
-            executor.execute(errorHandlingTask(future, false));
-            return future;
+            ListenableFutureTask<Object> listenableFuture = new ListenableFutureTask<>(task, null);
+            executeAndTrack(executor, listenableFuture);
+            return listenableFuture;
 
         } catch (RejectedExecutionException ex) {
         }
@@ -16,13 +16,19 @@ public class ThreadPoolTaskScheduler extends ExecutorConfigurationSupport {
         ExecutorService executor = getScheduledExecutor();
         try {
 
-            ListenableFutureTask<T> future = new ListenableFutureTask<>(task);
-            executor.execute(errorHandlingTask(future, false));
-            return future;
+            ListenableFutureTask<T> listenableFuture = new ListenableFutureTask<>(task);
+            executeAndTrack(executor, listenableFuture);
+            return listenableFuture;
 
         } catch (RejectedExecutionException ex) {
-
         }
+    }
+
+    private void executeAndTrack(ExecutorService executor, ListenableFutureTask<?> listenableFuture) {
+    }
+
+    @Override
+    protected void cancelRemainingTask(Runnable task) {
     }
 
 }
