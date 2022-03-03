@@ -17,12 +17,12 @@ public class CreateFileSystemResult implements Serializable, Cloneable {
         return this.ownerId;
     }
 
-    public void setCreationToken(String creationToken) {
-        this.creationToken = creationToken;
-    }
-    public String getCreationToken() {
-        return this.creationToken;
-    }
+    // public void setCreationToken(String creationToken) {
+    //     this.creationToken = creationToken;
+    // }
+    // public String getCreationToken() {
+    //     return this.creationToken;
+    // }
 
     // public CreateFileSystemResult withCreationToken(String creationToken) {
     //     setCreationToken(creationToken);
