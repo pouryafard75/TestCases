@@ -6,7 +6,7 @@ public final class TypeSyntaxTest extends TestCase {
     private void testNotEs6Typed(String source, String... features) {
 
         System.out.println("myCustomTest");
-        int customVariable = 10;
+        int customVariable = 10 * 10;
 
         for (int i = 0; i < features.length; i++) {
             features[i] = "type syntax is only supported in ES6 typed mode: "
