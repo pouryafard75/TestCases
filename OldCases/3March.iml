@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/Battery" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/CLDIFF" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/cell" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/getRoutingCol" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/getter" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/isInitialized" isTestSource="false" packagePrefix="newEX" />
+      <sourceFolder url="file://$MODULE_DIR$/leave" isTestSource="false" packagePrefix="com.puppycrawl.tools.checkstyle.checks.coding" />
+      <sourceFolder url="file://$MODULE_DIR$/pureReorder" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/syntax" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/testTerraCaching" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>
