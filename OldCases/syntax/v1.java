@@ -1,6 +1,5 @@
 public final class TypeSyntaxTest extends TestCase {
     private TestErrorManager testErrorManager;
-    
 
     @Override
     private void testNotEs6Typed(String source, String... features) {
