@@ -1,4 +1,4 @@
-public class meeting{
+public class lambdaExample {
     public int read() throws IOException {
         if (!getInitialized()) {
             initialize();
@@ -14,14 +14,12 @@ public class meeting{
             }
         } else {
             final int containsSize = contains.size();
-            for (line = readLine();
-                 line != null;
-                 line = readLine()) {
+            for (line = readLine(); line != null; line = readLine()) {
                 boolean matches = true;
-                for (int i = 0; matches && i<containsSize; i++) {
-                    String containsStr =
-                            (String)contains.elementAt(i);
-                    matches = line.indexOf(containsStr)>=0;
+                for (int i = 0; matches && i < containsSize; i++) 
+                {
+                    String containsStr = (String) contains.elementAt(i);
+                    matches = line.indexOf(containsStr) >= 0;
                 }
                 if (matches ^ isNegated()) {
                     break;
@@ -33,6 +31,7 @@ public class meeting{
         }
         return ch;
     }
+
     public int read2()
             throws IOException {
         if (!getInitialized()) {
@@ -49,13 +48,11 @@ public class meeting{
             }
         } else {
             final int regexpsSize = regexps.size();
-            for (line = readLine();
-                 line != null;
-                 line = readLine()) {
+            for (line = readLine(); line != null; line = readLine()) {
                 boolean matches = true;
-                for (int i = 0; matches && i<regexpsSize; i++) {
-                    RegularExpression regexp =
-                            (RegularExpression)regexps.elementAt(i);
+                for (int i = 0; matches && i < regexpsSize; i++) 
+                {
+                    RegularExpression regexp = (RegularExpression) regexps.elementAt(i);
                     Regexp re = regexp.getRegexp(getProject());
                     matches = re.matches(line);
                 }
