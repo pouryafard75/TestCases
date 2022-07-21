@@ -1,8 +1,9 @@
 class temp {
-    List mylist = new ArrayList();
+    List mylist;
 
     temp() {
-        System.out.println("here");
+        System.out.println("");
+        mylist = new ArrayList();
 
     }
 }
