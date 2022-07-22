@@ -18,18 +18,23 @@
  * #L%
  */
 package org.broadleafcommerce.openadmin.dto;
+
 import org.broadleafcommerce.common.presentation.client.LookupType;
 import org.broadleafcommerce.common.presentation.client.SupportedFieldType;
 import org.broadleafcommerce.common.presentation.client.VisibilityEnum;
 import org.broadleafcommerce.openadmin.dto.visitor.MetadataVisitor;
 import org.broadleafcommerce.openadmin.server.service.persistence.validation.PropertyValidator;
+
 import java.util.HashMap;
 import java.util.Map;
+
 /**
  * @author Jeff Fischer
  */
 public class BasicFieldMetadata extends FieldMetadata {
+
     private static final long serialVersionUID = 1L;
+
     protected SupportedFieldType fieldType;
     protected SupportedFieldType secondaryType = SupportedFieldType.INTEGER;
     protected Integer length;
@@ -46,6 +51,7 @@ public class BasicFieldMetadata extends FieldMetadata {
     protected String[][] enumerationValues;
     protected String enumerationClass;
     protected Boolean isDerived;
+
     //@AdminPresentation derived fields
     protected String name;
     protected VisibilityEnum visibility;
@@ -79,7 +85,6 @@ public class BasicFieldMetadata extends FieldMetadata {
     protected LookupType lookupType;
     protected Boolean translatable;
     protected String defaultValue;
-    protected Integer column;
     protected Boolean isBorderlessGroup;
 
     //for MapFields
@@ -89,96 +94,126 @@ public class BasicFieldMetadata extends FieldMetadata {
     protected String toOneTargetProperty;
     protected String toOneParentProperty;
     protected String mapKeyValueProperty;
+
     public SupportedFieldType getFieldType() {
         return fieldType;
     }
+
     public void setFieldType(SupportedFieldType fieldType) {
         this.fieldType = fieldType;
     }
+
     public SupportedFieldType getSecondaryType() {
         return secondaryType;
     }
+
     public void setSecondaryType(SupportedFieldType secondaryType) {
         this.secondaryType = secondaryType;
     }
+
     public Integer getLength() {
         return length;
     }
+
     public void setLength(Integer length) {
         this.length = length;
     }
+
     public Boolean getRequired() {
         if (required == null) {
             return false;
         }
         return required;
     }
+
     public void setRequired(Boolean required) {
         this.required = required;
     }
+
     public Integer getScale() {
         return scale;
     }
+
     public void setScale(Integer scale) {
         this.scale = scale;
     }
+
     public Integer getPrecision() {
         return precision;
     }
+
     public void setPrecision(Integer precision) {
         this.precision = precision;
     }
+
     public Boolean getUnique() {
         return unique;
     }
+
     public void setUnique(Boolean unique) {
         this.unique = unique;
     }
+
     public Boolean getMutable() {
         return mutable;
     }
+
     public void setMutable(Boolean mutable) {
         this.mutable = mutable;
     }
+
     public String getForeignKeyProperty() {
         return foreignKeyProperty;
     }
+
     public void setForeignKeyProperty(String foreignKeyProperty) {
         this.foreignKeyProperty = foreignKeyProperty;
     }
+
     public String getForeignKeyClass() {
         return foreignKeyClass;
     }
+
     public void setForeignKeyClass(String foreignKeyClass) {
         this.foreignKeyClass = foreignKeyClass;
     }
+
     public Boolean getForeignKeyCollection() {
         return foreignKeyCollection == null ? false : foreignKeyCollection;
     }
+
     public void setForeignKeyCollection(Boolean foreignKeyCollection) {
         this.foreignKeyCollection = foreignKeyCollection;
     }
+
     public MergedPropertyType getMergedPropertyType() {
         return mergedPropertyType;
     }
+
     public void setMergedPropertyType(MergedPropertyType mergedPropertyType) {
         this.mergedPropertyType = mergedPropertyType;
     }
+
     public String[][] getEnumerationValues() {
         return enumerationValues;
     }
+
     public void setEnumerationValues(String[][] enumerationValues) {
         this.enumerationValues = enumerationValues;
     }
+
     public String getForeignKeyDisplayValueProperty() {
         return foreignKeyDisplayValueProperty;
     }
+
     public void setForeignKeyDisplayValueProperty(String foreignKeyDisplayValueProperty) {
         this.foreignKeyDisplayValueProperty = foreignKeyDisplayValueProperty;
     }
+
     public String getEnumerationClass() {
         return enumerationClass;
     }
+
     public void setEnumerationClass(String enumerationClass) {
         this.enumerationClass = enumerationClass;
     }
@@ -186,60 +221,79 @@ public class BasicFieldMetadata extends FieldMetadata {
     public Boolean getIsDerived() {
         return isDerived;
     }
+
     public void setDerived(Boolean isDerived) {
         this.isDerived = isDerived;
     }
+
     public String getName() {
         return name;
     }
+
     public void setName(String name) {
         this.name = name;
     }
+
     public SupportedFieldType getExplicitFieldType() {
         return explicitFieldType;
     }
+
     public void setExplicitFieldType(SupportedFieldType fieldType) {
         this.explicitFieldType = fieldType;
     }
+
     public String getGroup() {
         return group;
     }
+
     public void setGroup(String group) {
         this.group = group;
     }
+
     public Boolean isLargeEntry() {
         return largeEntry;
     }
+
     public void setLargeEntry(Boolean largeEntry) {
         this.largeEntry = largeEntry;
     }
+
     public Boolean isProminent() {
         return prominent;
     }
+
     public void setProminent(Boolean prominent) {
         this.prominent = prominent;
     }
+
     public String getColumnWidth() {
         return columnWidth;
     }
+
     public void setColumnWidth(String columnWidth) {
         this.columnWidth = columnWidth;
     }
+
     public String getBroadleafEnumeration() {
         return broadleafEnumeration;
     }
+
     public void setBroadleafEnumeration(String broadleafEnumeration) {
         this.broadleafEnumeration = broadleafEnumeration;
     }
+
     public Boolean getReadOnly() {
         return readOnly;
     }
+
     public void setReadOnly(Boolean readOnly) {
         this.readOnly = readOnly;
     }
+
     public Integer getGroupOrder() {
         return groupOrder;
     }
+
     public void setGroupOrder(Integer groupOrder) {
         this.groupOrder = groupOrder;
     }
@@ -247,9 +301,11 @@ public class BasicFieldMetadata extends FieldMetadata {
     public Integer getGridOrder() {
         return gridOrder;
     }
+
     public void setGridOrder(Integer gridOrder) {
         this.gridOrder = gridOrder;
     }
+
     /**
      * @return the validation configurations for this property keyed by the fully-qualified name of the
      * {@link PropertyValidator} implementation
@@ -257,48 +313,63 @@ public class BasicFieldMetadata extends FieldMetadata {
     public Map<String, Map<String, String>> getValidationConfigurations() {
         return validationConfigurations;
     }
+
     public void setValidationConfigurations(Map<String, Map<String, String>> validationConfigurations) {
         this.validationConfigurations = validationConfigurations;
     }
+
     public Boolean getRequiredOverride() {
         return requiredOverride;
     }
+
     public void setRequiredOverride(Boolean requiredOverride) {
         this.requiredOverride = requiredOverride;
     }
+
     public Boolean getGroupCollapsed() {
         return groupCollapsed;
     }
+
     public void setGroupCollapsed(Boolean groupCollapsed) {
         this.groupCollapsed = groupCollapsed;
     }
+
     public String getTooltip() {
         return tooltip;
     }
+
     public void setTooltip(String tooltip) {
         this.tooltip = tooltip;
     }
+
     public String getHelpText() {
         return helpText;
     }
+
     public void setHelpText(String helpText) {
         this.helpText = helpText;
     }
+
     public String getHint() {
         return hint;
     }
+
     public void setHint(String hint) {
         this.hint = hint;
     }
+
     public VisibilityEnum getVisibility() {
         return visibility;
     }
+
     public void setVisibility(VisibilityEnum visibility) {
         this.visibility = visibility;
     }
+
     public String getLookupDisplayProperty() {
         return lookupDisplayProperty;
     }
+
     public void setLookupDisplayProperty(String lookupDisplayProperty) {
         this.lookupDisplayProperty = lookupDisplayProperty;
     }
@@ -317,63 +388,83 @@ public class BasicFieldMetadata extends FieldMetadata {
     public void setEnableTypeaheadLookup(Boolean enableTypeaheadLookup) {
         this.enableTypeaheadLookup = enableTypeaheadLookup;
     }
+
     public Boolean getOptionCanEditValues() {
         return optionCanEditValues;
     }
+
     public void setOptionCanEditValues(Boolean optionCanEditValues) {
         this.optionCanEditValues = optionCanEditValues;
     }
+
     public String getOptionDisplayFieldName() {
         return optionDisplayFieldName;
     }
+
     public void setOptionDisplayFieldName(String optionDisplayFieldName) {
         this.optionDisplayFieldName = optionDisplayFieldName;
     }
+
     public String getOptionListEntity() {
         return optionListEntity;
     }
+
     public void setOptionListEntity(String optionListEntity) {
         this.optionListEntity = optionListEntity;
     }
+
     public String getOptionValueFieldName() {
         return optionValueFieldName;
     }
+
     public void setOptionValueFieldName(String optionValueFieldName) {
         this.optionValueFieldName = optionValueFieldName;
     }
+
     public String[][] getOptionFilterParams() {
         return optionFilterParams;
     }
+
     public void setOptionFilterParams(String[][] optionFilterParams) {
         this.optionFilterParams = optionFilterParams;
     }
+
     public String[] getCustomCriteria() {
         return customCriteria;
     }
+
     public void setCustomCriteria(String[] customCriteria) {
         this.customCriteria = customCriteria;
     }
+
     public Boolean getUseServerSideInspectionCache() {
         return useServerSideInspectionCache;
     }
+
     public void setUseServerSideInspectionCache(Boolean useServerSideInspectionCache) {
         this.useServerSideInspectionCache = useServerSideInspectionCache;
     }
+
     public Boolean getToOneLookupCreatedViaAnnotation() {
         return toOneLookupCreatedViaAnnotation;
     }
+
     public void setToOneLookupCreatedViaAnnotation(Boolean toOneLookupCreatedViaAnnotation) {
         this.toOneLookupCreatedViaAnnotation = toOneLookupCreatedViaAnnotation;
     }
+
     public String getRuleIdentifier() {
         return ruleIdentifier;
     }
+
     public void setRuleIdentifier(String ruleIdentifier) {
         this.ruleIdentifier = ruleIdentifier;
     }
+
     public String getMapFieldValueClass() {
         return mapFieldValueClass;
     }
+
     public void setMapFieldValueClass(String mapFieldValueClass) {
         this.mapFieldValueClass = mapFieldValueClass;
     }
@@ -381,36 +472,47 @@ public class BasicFieldMetadata extends FieldMetadata {
     public LookupType getLookupType() {
         return lookupType;
     }
+
     public Boolean getSearchable() {
         return searchable;
     }
+
     public void setSearchable(Boolean searchable) {
         this.searchable = searchable;
     }
+
     public String getManyToField() {
         return manyToField;
     }
+
     public void setManyToField(String manyToField) {
         this.manyToField = manyToField;
     }
+
     public String getToOneTargetProperty() {
         return toOneTargetProperty;
     }
+
     public void setToOneTargetProperty(String toOneTargetProperty) {
         this.toOneTargetProperty = toOneTargetProperty;
     }
+
     public String getToOneParentProperty() {
         return toOneParentProperty;
     }
+
     public void setToOneParentProperty(String toOneParentProperty) {
         this.toOneParentProperty = toOneParentProperty;
     }
+
     public String getMapKeyValueProperty() {
         return mapKeyValueProperty;
     }
+
     public void setMapKeyValueProperty(String mapKeyValueProperty) {
         this.mapKeyValueProperty = mapKeyValueProperty;
     }
+
     public void setLookupType(LookupType lookupType) {
         this.lookupType = lookupType;
     }
@@ -422,27 +524,23 @@ public class BasicFieldMetadata extends FieldMetadata {
     public void setTranslatable(Boolean translatable) {
         this.translatable = translatable;
     }
+
     public String getDefaultValue() {
         return defaultValue;
     }
+
     public void setDefaultValue(String defaultValue) {
         this.defaultValue = defaultValue;
-    }
-
-    public Integer getColumn() {
-        return column;
-    }
-
-    public void setColumn(Integer column) {
-        this.column = column;
     }
 
     public Boolean getIsBorderlessGroup() {
         return isBorderlessGroup;
     }
+
     public void setIsBorderlessGroup(Boolean isBorderlessGroup) {
         this.isBorderlessGroup = isBorderlessGroup;
     }
+
     @Override
     public FieldMetadata cloneFieldMetadata() {
         BasicFieldMetadata metadata = new BasicFieldMetadata();
@@ -467,6 +565,7 @@ public class BasicFieldMetadata extends FieldMetadata {
                 System.arraycopy(enumerationValues[j], 0, metadata.enumerationValues[j], 0, enumerationValues[j].length);
             }
         }
+
         metadata.name = name;
         metadata.visibility = visibility;
         metadata.group = group;
@@ -520,16 +619,18 @@ public class BasicFieldMetadata extends FieldMetadata {
         metadata.translatable = translatable;
         metadata.isDerived = isDerived;
         metadata.defaultValue = defaultValue;
-        metadata.column = column;
         metadata.isBorderlessGroup = isBorderlessGroup;
 
         metadata = (BasicFieldMetadata) populate(metadata);
+
         return metadata;
     }
+
     @Override
     public void accept(MetadataVisitor visitor) {
         visitor.visit(this);
     }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -544,7 +645,9 @@ public class BasicFieldMetadata extends FieldMetadata {
         if (!super.equals(o)) {
             return false;
         }
+
         BasicFieldMetadata metadata = (BasicFieldMetadata) o;
+
         if (broadleafEnumeration != null ? !broadleafEnumeration.equals(metadata.broadleafEnumeration) : metadata.broadleafEnumeration != null) {
             return false;
         }
@@ -686,8 +789,10 @@ public class BasicFieldMetadata extends FieldMetadata {
         if (isDerived != null ? !isDerived.equals(metadata.isDerived) : metadata.isDerived != null) {
             return false;
         }
+
         return true;
     }
+
     @Override
     public int hashCode() {
         int result = super.hashCode();
@@ -740,4 +845,6 @@ public class BasicFieldMetadata extends FieldMetadata {
         result = 31 * result + (isDerived != null ? isDerived.hashCode() : 0);
         return result;
     }
+
+
 }

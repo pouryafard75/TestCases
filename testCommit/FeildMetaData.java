@@ -20,10 +20,12 @@
 package org.broadleafcommerce.openadmin.dto;
 
 import org.broadleafcommerce.openadmin.dto.visitor.MetadataVisitor;
+
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
 /**
  * 
  * @author jfischer
@@ -32,16 +34,19 @@ import java.util.Map;
 public abstract class FieldMetadata implements Serializable {
     
     private static final long serialVersionUID = 1L;
+
     private String inheritedFromType;
     private String[] availableToTypes;
     private Boolean excluded;
     private String friendlyName;
     private String securityLevel;
     private Integer order;
+    private Integer column;
     private String owningClassFriendlyName;
 
     private String tab;
     private Integer tabOrder;
+
     //temporary fields
     private Boolean childrenExcluded;
     private String targetClass;
@@ -50,33 +55,43 @@ public abstract class FieldMetadata implements Serializable {
     private String fieldName;
     private String showIfProperty;
     private String currencyCodeField;
+
     //Additional metadata not supported as first class
     private Map<String, Object> additionalMetadata = new HashMap<String, Object>();
+
     public String[] getAvailableToTypes() {
         return availableToTypes;
     }
+
     public void setAvailableToTypes(String[] availableToTypes) {
         Arrays.sort(availableToTypes);
         this.availableToTypes = availableToTypes;
     }
+
     public String getInheritedFromType() {
         return inheritedFromType;
     }
+
     public void setInheritedFromType(String inheritedFromType) {
         this.inheritedFromType = inheritedFromType;
     }
+
     public Boolean getExcluded() {
         return excluded;
     }
+
     public void setExcluded(Boolean excluded) {
         this.excluded = excluded;
     }
+
     public Map<String, Object> getAdditionalMetadata() {
         return additionalMetadata;
     }
+
     public void setAdditionalMetadata(Map<String, Object> additionalMetadata) {
         this.additionalMetadata = additionalMetadata;
     }
+
     protected FieldMetadata populate(FieldMetadata metadata) {
         metadata.inheritedFromType = inheritedFromType;
         if (availableToTypes != null) {
@@ -95,99 +110,137 @@ public abstract class FieldMetadata implements Serializable {
         metadata.fieldName = fieldName;
         metadata.showIfProperty = showIfProperty;
         metadata.currencyCodeField = currencyCodeField;
+        metadata.column = column;
         for (Map.Entry<String, Object> entry : additionalMetadata.entrySet()) {
             metadata.additionalMetadata.put(entry.getKey(), entry.getValue());
         }
         return metadata;
     }
+
     public String getShowIfProperty() {
         return showIfProperty;
     }
+
     public void setShowIfProperty(String showIfProperty) {
         this.showIfProperty = showIfProperty;
     }
+
     public String getCurrencyCodeField() {
         return currencyCodeField;
     }
+
     public void setCurrencyCodeField(String currencyCodeField) {
         this.currencyCodeField = currencyCodeField;
     }
+
     public String getFriendlyName() {
         return friendlyName;
     }
+
     public void setFriendlyName(String friendlyName) {
         this.friendlyName = friendlyName;
     }
+
     public String getSecurityLevel() {
         return securityLevel;
     }
+
     public void setSecurityLevel(String securityLevel) {
         this.securityLevel = securityLevel;
     }
+
     public Integer getOrder() {
         return order;
     }
+
     public void setOrder(Integer order) {
         this.order = order;
     }
+
     public String getTargetClass() {
         return targetClass;
     }
+
     public void setTargetClass(String targetClass) {
         this.targetClass = targetClass;
     }
+
     public String getFieldName() {
         return fieldName;
     }
+
     public void setFieldName(String fieldName) {
         this.fieldName = fieldName;
     }
+
     public String getOwningClassFriendlyName() {
         return owningClassFriendlyName;
     }
+
     public void setOwningClassFriendlyName(String owningClassFriendlyName) {
         this.owningClassFriendlyName = owningClassFriendlyName;
     }
+
     public String getOwningClass() {
         return owningClass;
     }
+
     public void setOwningClass(String owningClass) {
         this.owningClass = owningClass;
     }
+
     public String getPrefix() {
         return prefix;
     }
+
     public void setPrefix(String prefix) {
         this.prefix = prefix;
     }
+
     public Boolean getChildrenExcluded() {
         return childrenExcluded;
     }
+
     public void setChildrenExcluded(Boolean childrenExcluded) {
         this.childrenExcluded = childrenExcluded;
     }
+
     public String getTab() {
         return tab;
     }
+
     public void setTab(String tab) {
         this.tab = tab;
     }
+
     public Integer getTabOrder() {
         return tabOrder;
     }
+
     public void setTabOrder(Integer tabOrder) {
         this.tabOrder = tabOrder;
+    }
+
+    public Integer getColumn() {
+        return column;
+    }
+
+    public void setColumn(Integer column) {
+        this.column = column;
     }
 
     public abstract FieldMetadata cloneFieldMetadata();
 
     public abstract void accept(MetadataVisitor visitor);
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null) return false;
         if (!getClass().isAssignableFrom(o.getClass())) return false;
+
         FieldMetadata that = (FieldMetadata) o;
+
         if (additionalMetadata != null ? !additionalMetadata.equals(that.additionalMetadata) : that
                 .additionalMetadata != null)
             return false;
@@ -216,8 +269,10 @@ public abstract class FieldMetadata implements Serializable {
         if (tab != null ? !tab.equals(that.tab) : that.tab != null) return false;
         if (tabOrder != null ? !tabOrder.equals(that.tabOrder) : that.tabOrder != null) return false;
         if (targetClass != null ? !targetClass.equals(that.targetClass) : that.targetClass != null) return false;
+
         return true;
     }
+
     @Override
     public int hashCode() {
         int result = inheritedFromType != null ? inheritedFromType.hashCode() : 0;

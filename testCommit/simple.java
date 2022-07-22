@@ -3,14 +3,16 @@ package v1;
 public class simple {
     private void f1()
     {
-        A();
-        B();
+        NewMethod();
         D();
     }
-    public void f2()
+    void f2()
     {
+        C();
+        NewMethod();
+    }    
+    private void NewMethod(){
         A();
         B();
-        C();
-    }    
+    }
 }
