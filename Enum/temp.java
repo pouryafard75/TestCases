@@ -4,8 +4,6 @@ public class temp {
     enum IntermediateType {
         OBJ,
         INT,
-        DOUBLE,
-        LONG,
         NONE {
            @Override
            public boolean shouldUseIntermediate(boolean sorted, boolean distinct) {
