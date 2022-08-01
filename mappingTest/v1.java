@@ -1,6 +1,8 @@
 public class v1 {
+    int fname;
+
     public static void main(String[] args) {
-        DB.set(10);
+        int a = fname;
     }
 
 }
