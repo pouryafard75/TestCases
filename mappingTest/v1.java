@@ -1,6 +1,6 @@
 public class v1 {
     public static void main(String[] args) {
-        set(10);
+        DB.set(10);
     }
 
 }
