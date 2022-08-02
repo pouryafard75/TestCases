@@ -12,6 +12,7 @@ public class addSharpTest {
     public static void main(String[] args) {
         f2();
         test();
+        ftest();
         f1();
 
     }

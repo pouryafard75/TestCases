@@ -1,4 +1,4 @@
-public class lambdaExample {
+public class secondRenamed {
     public int read() throws IOException {
         return extracted(contains,
                 (Integer i) -> {
@@ -33,11 +33,9 @@ public class lambdaExample {
             }
         } else {
             final int containsSize = vector.size();
-            for (line = readLine(); line != null; line = readLine()) 
-            {
+            for (line = readLine(); line != null; line = readLine()) {
                 boolean matches = true;
-                for (int i = 0; matches && i < containsSize; i++) 
-                {
+                for (int i = 0; matches && i < containsSize; i++) {
                     matches = (boolean) matcher.apply(i);
                 }
                 if (matches ^ isNegated()) {
@@ -48,6 +46,7 @@ public class lambdaExample {
                 return read();
             }
         }
+        int a = 10;
         return ch;
     }
 }
