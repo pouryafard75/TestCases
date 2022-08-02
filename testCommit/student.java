@@ -1,7 +1,8 @@
 package v1;
 
-public class newSimple {
+public class student {
     private void f1() {
+        String tempo = new String();
         NewMethod();
         D();
     }
