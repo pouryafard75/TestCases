@@ -3,7 +3,6 @@ package v1;
 public class newSimple {
     private void f1() {
         NewMethod();
-        newStatemenet();
         D();
     }
 
@@ -15,5 +14,6 @@ public class newSimple {
     private void NewMethod() {
         A();
         B();
+        newStatement(a, b);
     }
 }
