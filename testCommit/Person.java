@@ -1,20 +1,18 @@
 package v1;
 
-public class student {
+public class Person {
     private void f1() {
-        String tempo = new String();
         NewMethod();
         D();
     }
 
     void f2() {
-        C();
-        NewMethod();
+
     }
 
     private void NewMethod() {
-        A();
         B();
+        Db.setTime(null);
         newStatement(a, b);
     }
 }
