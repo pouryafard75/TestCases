@@ -1,8 +1,7 @@
 package v1;
 
-public class Person {
+public class temp {
     private void f1() {
-        NewMethod();
         D();
     }
 
@@ -13,6 +12,5 @@ public class Person {
     private void NewMethod() {
         B();
         Db.setTime(null);
-        newStatement(a, b);
     }
 }
