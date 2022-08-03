@@ -4,5 +4,6 @@ public class test {
       /** ks/cf existence checks will be done by open and getCFS methods for us */
       Keyspace keyspace = Keyspace.open(ksName);
       keyspace.getColumnFamilyStore(cfName).loadNewSSTables();
+      db();
    }
 }
