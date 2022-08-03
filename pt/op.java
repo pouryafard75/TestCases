@@ -48,6 +48,7 @@ import org.robovm.apple.coregraphics.*;
 
     /* <name> */ CGImagePropertyGIF/* </name> */ (String getterName) {
         super(Values.class, getterName);
+        test();
     }
 
 }
