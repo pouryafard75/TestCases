@@ -28,7 +28,7 @@ import org.robovm.apple.coregraphics.*;
     /**
      * @since Available in iOS 4.0 and later.
      */
-    public static final CGImagePropertyGIF ImageColorMap = new CGImagePropertyGIF("ImageColorMapKey");
+    public static final CGImagePropertyGIF ImageColorMap = new CGImagePropertyGIF("ImageColorMapKey", "as");
     /**
      * @since Available in iOS 4.0 and later.
      */
