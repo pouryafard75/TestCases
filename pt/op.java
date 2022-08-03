@@ -16,39 +16,29 @@ import org.robovm.apple.coregraphics.*;
         extends /* <extends> */GlobalValueEnumeration<CFString>/* </extends> */
 /* <implements> *//* </implements> */ {
 
-    /* <constants> */
+    /* <constants> *//* </constants> */
     /**
      * @since Available in iOS 4.0 and later.
      */
-    public static final CGImagePropertyGIF LoopCount = new CGImagePropertyGIF("LoopCount");
+    public static final CGImagePropertyGIF LoopCount = new CGImagePropertyGIF("LoopCountKey");
     /**
      * @since Available in iOS 4.0 and later.
      */
-    public static final CGImagePropertyGIF DelayTime = new CGImagePropertyGIF("DelayTime");
+    public static final CGImagePropertyGIF DelayTime = new CGImagePropertyGIF("DelayTimeKey");
     /**
      * @since Available in iOS 4.0 and later.
      */
-    public static final CGImagePropertyGIF ImageColorMap = new CGImagePropertyGIF("ImageColorMap");
+    public static final CGImagePropertyGIF ImageColorMap = new CGImagePropertyGIF("ImageColorMapKey");
     /**
      * @since Available in iOS 4.0 and later.
      */
-    public static final CGImagePropertyGIF HasGlobalColorMap = new CGImagePropertyGIF("HasGlobalColorMap");
+    public static final CGImagePropertyGIF HasGlobalColorMap = new CGImagePropertyGIF("HasGlobalColorMapKey");
     /**
      * @since Available in iOS 4.0 and later.
      */
-    public static final CGImagePropertyGIF UnclampedDelayTime = new CGImagePropertyGIF("UnclampedDelayTime");
-    /* </constants> */
+    public static final CGImagePropertyGIF UnclampedDelayTime = new CGImagePropertyGIF("UnclampedDelayTimeKey");
 
-    private static /* <name> */CGImagePropertyGIF/* </name> */[] values = new /* <name> */CGImagePropertyGIF/*
-                                                                                                             * </name>
-                                                                                                             */[] {
-            /* <value_list> */LoopCount, DelayTime, ImageColorMap, HasGlobalColorMap, UnclampedDelayTime/*
-                                                                                                         * </value_list>
-                                                                                                         */ };
-
-    /* <name> */ CGImagePropertyGIF/* </name> */ (String getterName) {
-        super(Values.class, getterName);
-        test();
-    }
-
+    private static CGImagePropertyGIF[] values = new CGImagePropertyGIF[] { LoopCount, DelayTime, ImageColorMap,
+            HasGlobalColorMap, UnclampedDelayTime };
+    private final LazyGlobalValue<CFString> lazyGlobalValue;
 }
