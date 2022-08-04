@@ -24,7 +24,7 @@ import org.robovm.apple.coregraphics.*;
     /**
      * @since Available in iOS 4.0 and later.
      */
-    public static final CGImagePropertyGIF DelayTime = new CGImagePropertyGIF("DelayTimeKey");
+    public static final CGImagePropertyGIF DelayTime;
     /**
      * @since Available in iOS 4.0 and later.
      */
