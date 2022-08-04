@@ -1,8 +1,9 @@
 package v1;
 
-public class simple {
+public class newSimple {
     private void f1() {
         NewMethod();
+        newStatement();
         D();
     }
 
