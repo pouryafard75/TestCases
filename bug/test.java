@@ -5,14 +5,14 @@ public class test {
         eventually(new Condition() {
             @Override
             public boolean isSatisfied() throws Exception {
-                System.out.println("false");
-                return false;
+                System.out.println("True");
+                return true;
             }
 
             @Override
             public boolean isReady() throws Exception {
-                System.out.println("false");
-                return true;
+                System.out.println("True");
+                return false;
             }
         });
     }
