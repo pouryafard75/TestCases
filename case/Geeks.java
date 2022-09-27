@@ -1,6 +1,6 @@
 import static java.lang.Integer.*;
 import static java.lang.Byte.*;
-import static com.github.javaparser.GeneratedJavaParserConstants.*;
+import com.github.javaparser.GeneratedJavaParserConstants;
 
 enum Direction {
     left, right, top, down
