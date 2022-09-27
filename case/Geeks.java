@@ -3,7 +3,7 @@ import static java.lang.Byte.*;
 import static com.github.javaparser.GeneratedJavaParserConstants.*;
 
 enum Direction {
-    left, right
+    left, right, top, down
 }
 
 class Geeks {
