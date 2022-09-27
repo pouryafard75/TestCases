@@ -12,5 +12,10 @@ class Geeks {
         public void print() {
             System.out.println("ola");
         }
+
+        @Override
+        public void sleep() {
+            sleep(10);
+        }
     };
 }
