@@ -21,5 +21,7 @@ public class test {
                         return array;
                     }, null, false);
         }
+
+        int a = 2;
     }
 }
