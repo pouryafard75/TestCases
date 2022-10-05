@@ -3,7 +3,7 @@ public class test {
         return performOperation(TerminalFunctions.toArrayFunction(), false,
                 (v1, v2) -> {
                     Object[] array = Arrays.copyOf(v1, v1.length + v2.length);
-                    sleep(43);
+                    // sleep(43);
                     System.arraycopy(v2, 0, array, v1.length, v2.length);
                     return array;
                 }, null, false);
