@@ -9,5 +9,5 @@ public class test {
                 }, null, false);
     }
 
-    // int a = 2;
+    int a = 2;
 }
