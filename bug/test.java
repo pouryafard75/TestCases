@@ -1,10 +1,13 @@
-public class test {
+public class v1 {
 
     void main() {
-        sleep(1);
-        sleep(3);
-        class Named extends Object {
-            int a;
-        };
+        for (Filter filter : filters.getFilters()) {
+            if (filter instanceof ExternalResourceHolder) {
+                final Set<String> locations = ((ExternalResourceHolder) filter).getExternalResourceLocations();
+                externalResources.addAll(locations);
+            }
+        }
     }
 }
+
+
