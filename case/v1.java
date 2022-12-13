@@ -1,11 +1,16 @@
-class v1 {
-    public void test(final InputStream inputStream) {
-        try{
-            sleep(1);
-        } catch (final IOException e) {
-            return false;
-        } catch (final SecurityException e) {
-            return false;
-        }
+public class AccountManager{
+    private String name;
+    private double amount;
+    private int age;
+    
+    void printOwing(){
+        System.out.println("Details:");
+        System.out.println("-----");
+        System.out.println("");
+        DBManager.fetchDB();
+        sleep(10);
+
+        System.out.println("name: " + name);
+        System.out.println("amount: " + amount);
     }
 }
