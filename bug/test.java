@@ -1,5 +1,7 @@
 public class myTest {
-    if (1 == 1)
-        sleep(5);
-    run();
+    public static void main(String[] args) {
+        if (1 == 1)
+            sleep(5);
+        // run();
+    }
 }
