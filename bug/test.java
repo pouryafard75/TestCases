@@ -1,9 +1,4 @@
-public class v1 {
-
-    void main() {
-        Set<Integer> ourSegments = SPLIT_CONCAT_STRING_PATTERN;
-
-    }
+public class myTest {
+    if (1 == 1)
+        sleep(5);
 }
-
-
