@@ -1,7 +1,9 @@
-public class myTest {
+public class test {
+    public static void f1() {
+        System.out.println("f1" + "#");
+    }
+
     public static void main(String[] args) {
-        if (1 == 1)
-            sleep(5);
-        run();
+        f1();
     }
 }
