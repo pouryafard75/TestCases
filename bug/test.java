@@ -3,6 +3,7 @@ public class v1 {
 			@Override
 			public EditScript computeActions(ExtendedMultiMappingStore mappings, Map<String, TreeContext> parentContextMap, Map<String, TreeContext> childContextMap) {
 				sleep(20);
+                run();
 				return null;
 			}
 		};
