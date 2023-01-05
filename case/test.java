@@ -3,6 +3,7 @@ public class test {
         @Override
         public void run(){
             sleep(10);
+            System.out.println();
         }
     };
 }
