@@ -9,7 +9,12 @@ public class Run {
 					writePidFile(event);
 				}
 				catch (Exception ex) {
-					logger.warn(String.format("Cannot create pid file %s", this.file), ex);
+					String message = String
+							.format("Cannot create pid file %s", this.file);
+					if (failOnWriteError(event)) {
+						throw new IllegalStateException(message, ex);
+					}
+					logger.warn(message, ex);
 				}
 			}
 		}
