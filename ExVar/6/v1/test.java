@@ -1,13 +1,7 @@
-// Before refactoring:
-package ExVar.1.v2;
-public class Run {
+package ExVar.6.v1;
+
+public class test {
     public static void main(String[] args) {
-        int x = 5;
-        int y = 10;
-        int result = x * x + 3 * x + y * y + 5 * y;
-        System.out.println(result);
-    }
-    public static void test(String[] args) {
         if (!results.lostSegments.isEmpty()) {
             segmentsToProcess = new HashSet<>(results.lostSegments);
             results.lostSegments.clear();
@@ -17,4 +11,5 @@ public class Run {
             log.tracef("Finished rehash aware operation for id %s", id);
         }
     }
+
 }

@@ -11,4 +11,15 @@ public class Run {
         int result = xSquared + threeX + ySquared + fiveY;
         System.out.println(result);
     }
+    public static void test(String[] args) {
+        String strId = id == null ? "local" : id.toString();
+        if (!results.lostSegments.isEmpty()) {
+            segmentsToProcess = new HashSet<>(results.lostSegments);
+            results.lostSegments.clear();
+            log.tracef("Found %s lost segments for %s", segmentsToProcess, strId);
+        } else {
+            supplier.close();
+            log.tracef("Finished rehash aware operation for %s", strId);
+        }
+    }
 }
