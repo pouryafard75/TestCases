@@ -1,7 +1,6 @@
 public class test {
-    public void a(boolean check) {
-        if (check && true) {
-            System.out.println("qw");
-        }
+    public void run()
+    {
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();
     }
 }
