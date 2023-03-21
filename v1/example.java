@@ -1,10 +1,6 @@
 public class Run {
-    public void clear() {
-        modify();
-        publish();
-        }
-    public void display()
+    public void run()
     {
-        publish();
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();
     }
 }

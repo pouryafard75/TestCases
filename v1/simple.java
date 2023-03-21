@@ -1,16 +1,5 @@
-package v1;
-
-public class simple {
-    private void f1()
-    {
-        A();
-        B();
-        D();
-    }
-    public void f2()
-    {
-        A();
-        B();
-        C();
-    }    
+public class VcapApplicationListener {
+	public static void main(String[] args) {
+		System.out.println("createDate (Default TimeZone: " + parameterSet.defaultTimeZone.getDisplayName(false, TimeZone.SHORT, Locale.ROOT) + "):");
+	}
 }
