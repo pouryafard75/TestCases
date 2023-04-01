@@ -7,9 +7,13 @@ public class VcapApplicationListener {
     }
 
     for (Slide slide : attachmentManager.getSlideDeck().getSlides()) {
-      if      (slide.hasAudio()) drafts.add(new Draft(Draft.AUDIO, slide.getUri().toString()));
-      else if (slide.hasVideo()) drafts.add(new Draft(Draft.VIDEO, slide.getUri().toString()));
-      else if (slide.hasImage()) drafts.add(new Draft(Draft.IMAGE, slide.getUri().toString()));
+      String draftType = null;
+      if      (slide.hasAudio()) draftType = Draft.AUDIO;
+      else if (slide.hasVideo()) draftType = Draft.VIDEO;
+      else if (slide.hasImage()) draftType = slide.isEncrypted() ? Draft.ENCRYPTED_IMAGE : Draft.IMAGE;
+
+      if (draftType != null)
+        drafts.add(new Draft(draftType, slide.getUri().toString()));
     }
 
     return drafts;
