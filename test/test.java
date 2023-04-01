@@ -1,13 +1,18 @@
 public class VcapApplicationListener {
-	/**
-     * Finds a valid path for a file from an array of FileStatus objects.
-     * @param statusArray Array of FileStatus objects in which to search
-     * for the file.
-     * @param fileSystem FileSystem in which to search for the first file.
-     * @return The first file found.
-     * @throws IOException
-     */
-    public static Path depthFirstSearchForFile(final FileStatus[] statusArray, final FileSystem fileSystem) throws IOException {
-      return null;
+	private Drafts getDraftsForCurrentState() {
+    Drafts drafts = new Drafts();
+
+    if (!Util.isEmpty(composeText)) {
+      drafts.add(new Draft(Draft.TEXT, composeText.getText().toString()));
     }
+
+    for (Slide slide : attachmentManager.getSlideDeck().getSlides()) {
+      if      (slide.hasAudio()) drafts.add(new Draft(Draft.AUDIO, slide.getUri().toString()));
+      else if (slide.hasVideo()) drafts.add(new Draft(Draft.VIDEO, slide.getUri().toString()));
+      else if (slide.hasImage()) drafts.add(new Draft(Draft.IMAGE, slide.getUri().toString()));
+    }
+
+    return drafts;
+  }
+
 }
