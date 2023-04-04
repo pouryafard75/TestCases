@@ -132,34 +132,28 @@ public class RequireThisCheck extends DeclarationCollector {
      */
     private void processIDENT(DetailAST ast) {
         final int parentType = ast.getParent().getType();
-        switch (parentType) {
-            case TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR:
-            case TokenTypes.ANNOTATION:
-            case TokenTypes.ANNOTATION_FIELD_DEF:
-                // no need to check annotations content
-                break;
-            case TokenTypes.METHOD_CALL: {
-                // let's check method calls
-                if (checkMethods && isClassMethod(ast.getText())) {
-                    log(ast, "require.this.method", ast.getText());
-                }
-                break;
-            }
-            default: {
-                if (checkFields) {
-                    processField(ast, parentType);
-                }
-                break;
-            }
-        }
-    }
 
-    /**
-     * process validation of Field
-     * @param ast field definition ast token
-     * @param parentType type of the parrent
-     */
-    private void processField(DetailAST ast, int parentType) {
+        if (parentType == TokenTypes.ANNOTATION_MEMBER_VALUE_PAIR
+            || parentType == TokenTypes.ANNOTATION
+            || parentType == TokenTypes.ANNOTATION_FIELD_DEF) {
+            //cannot refer to 'this' from annotations
+            return;
+        }
+
+        // let's check method calls
+        if (parentType == TokenTypes.METHOD_CALL) {
+            if (checkMethods && isClassMethod(ast.getText())) {
+                log(ast, "require.this.method", ast.getText());
+            }
+            return;
+        }
+
+        // let's check fields
+        if (!checkFields) {
+            // we shouldn't check fields
+            return;
+        }
+
         if (ScopeUtils.getSurroundingScope(ast) == null) {
             // it is not a class or interface it's
             // either import or package
@@ -168,16 +162,23 @@ public class RequireThisCheck extends DeclarationCollector {
         }
 
         if (parentType == TokenTypes.DOT
-                && ast.getPreviousSibling() != null) {
+            && ast.getPreviousSibling() != null) {
             // it's the method name in a method call; no problem
             return;
         }
         if (parentType == TokenTypes.TYPE
-                || parentType == TokenTypes.LITERAL_NEW) {
+            || parentType == TokenTypes.LITERAL_NEW) {
             // it's a type name; no problem
             return;
         }
-        if (isDeclarationToken(parentType)) {
+        if (parentType == TokenTypes.VARIABLE_DEF
+            || parentType == TokenTypes.CTOR_DEF
+            || parentType == TokenTypes.METHOD_DEF
+            || parentType == TokenTypes.CLASS_DEF
+            || parentType == TokenTypes.ENUM_DEF
+            || parentType == TokenTypes.INTERFACE_DEF
+            || parentType == TokenTypes.PARAMETER_DEF
+            || parentType == TokenTypes.TYPE_ARGUMENT) {
             // it's being declared; no problem
             return;
         }
@@ -186,21 +187,5 @@ public class RequireThisCheck extends DeclarationCollector {
         if (isClassField(name)) {
             log(ast, "require.this.variable", name);
         }
-    }
-
-    /**
-     * check that token is related to Definition tokens
-     * @param parentType token Type
-     * @return true if token is related to Definition Tokens
-     */
-    private boolean isDeclarationToken(int parentType) {
-        return parentType == TokenTypes.VARIABLE_DEF
-            || parentType == TokenTypes.CTOR_DEF
-            || parentType == TokenTypes.METHOD_DEF
-            || parentType == TokenTypes.CLASS_DEF
-            || parentType == TokenTypes.ENUM_DEF
-            || parentType == TokenTypes.INTERFACE_DEF
-            || parentType == TokenTypes.PARAMETER_DEF
-            || parentType == TokenTypes.TYPE_ARGUMENT;
     }
 }
