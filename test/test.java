@@ -1,22 +1,17 @@
 public class VcapApplicationListener {
-	private Drafts getDraftsForCurrentState() {
-    Drafts drafts = new Drafts();
+  private static class InterruptionTests {
 
-    if (!Util.isEmpty(composeText)) {
-      drafts.add(new Draft(Draft.TEXT, composeText.getText().toString()));
+    private boolean isUnSubscribed;
+    private RuntimeException error;
+    private CountDownLatch latch = new CountDownLatch(1);
+
+    private Observable<Void> createObservable() {
+        return Observable.<Void>never().doOnUnsubscribe(new Action0() {
+            @Override
+            public void call() {
+                isUnSubscribed = true;
+            }
+        });
     }
-
-    for (Slide slide : attachmentManager.getSlideDeck().getSlides()) {
-      String draftType = null;
-      if      (slide.hasAudio()) draftType = Draft.AUDIO;
-      else if (slide.hasVideo()) draftType = Draft.VIDEO;
-      else if (slide.hasImage()) draftType = slide.isEncrypted() ? Draft.ENCRYPTED_IMAGE : Draft.IMAGE;
-
-      if (draftType != null)
-        drafts.add(new Draft(draftType, slide.getUri().toString()));
-    }
-
-    return drafts;
   }
-
 }
