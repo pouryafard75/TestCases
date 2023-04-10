@@ -2,16 +2,20 @@ public class VcapApplicationListener {
   private static class InterruptionTests {
 
     private boolean isUnSubscribed;
-    private RuntimeException error;
+    private final AtomicReference<RuntimeException> errorRef = new AtomicReference<RuntimeException>();
     private CountDownLatch latch = new CountDownLatch(1);
 
-    private Observable<Void> createObservable() {
-        return Observable.<Void>never().doOnUnsubscribe(new Action0() {
+    private Action0 createOnUnsubscribe() {
+        return new Action0() {
             @Override
             public void call() {
                 isUnSubscribed = true;
             }
-        });
+        };
+    }
+
+    private Observable<Void> createNeverObservable() {
+        return Observable.<Void>never().doOnUnsubscribe(createOnUnsubscribe());
     }
   }
 }
