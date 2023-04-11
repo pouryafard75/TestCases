@@ -1,21 +1,7 @@
 public class VcapApplicationListener {
-  private static class InterruptionTests {
-
-    private boolean isUnSubscribed;
-    private final AtomicReference<RuntimeException> errorRef = new AtomicReference<RuntimeException>();
-    private CountDownLatch latch = new CountDownLatch(1);
-
-    private Action0 createOnUnsubscribe() {
-        return new Action0() {
-            @Override
-            public void call() {
-                isUnSubscribed = true;
-            }
-        };
-    }
-
-    private Observable<Void> createNeverObservable() {
-        return Observable.<Void>never().doOnUnsubscribe(createOnUnsubscribe());
-    }
+  public void rename(String newName) {
+    int sharp = newName.indexOf("#");
+    super.rename(sharp < 0 ? newName : newName.substring(sharp));
+    myGeneratorDescriptor.setGeneratorUID(newName);
   }
 }
