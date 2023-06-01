@@ -2,7 +2,7 @@ package Builder;
 
 public class test {
     public static void main(String[] args) {
-        rdbmsStore.get().listRoleNames();
+        this.maybeAliased = !assignNode.getParent().isExprResult();
     }
     
 }
