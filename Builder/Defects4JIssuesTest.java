@@ -27,7 +27,7 @@ import static org.refactoringminer.astDiff.utils.UtilMethods.*;
 /**
  * @author  Pourya Alikhani Fard pouryafard75@gmail.com
  */
-@Disabled
+@Disabled(value = "I disabled it to modify the annotation")
 public class Defects4JIssuesTest {
     private static final String dir = getDefects4jProblemsMappingPath();
 
