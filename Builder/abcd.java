@@ -1,5 +1,5 @@
 public class abcd{
     public static main(String[] args){
-        new a().b().c().d()
+        new a().b().e("y").c().d()
     }
 }
