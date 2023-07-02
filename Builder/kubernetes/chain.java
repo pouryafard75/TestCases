@@ -1,5 +1,5 @@
 public class chain{
     void a(){
-        new a().b().c().d();
+        new a().b().e("y").c().d();
     }
 }
