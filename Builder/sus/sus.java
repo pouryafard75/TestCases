@@ -1,5 +1,5 @@
 public class sus{
     void x(){
-            boolean success = builder.compile(pathToCatalog, 2, 1, 0);
+            boolean success = builder.compile(config.m_pathToCatalog, sitesPerHost, hostCount, replication);
     }
 }
