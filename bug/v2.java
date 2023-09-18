@@ -16,6 +16,7 @@ public class v2 {
 		}
 
     void main() {   
+        test();
         filters.getFilters().stream().filter(filter -> filter instanceof ExternalResourceHolder)
         .forEach(filter -> {
             final Set<String> locations =
