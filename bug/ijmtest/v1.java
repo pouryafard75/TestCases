@@ -1,3 +1,5 @@
 public class v1 {
-    TrieMap<String,Integer> trieMap = new TrieMap<String,Integer>();
+    class myInnerClass{
+        private static final TrieMap<String,Integer> trieMap = new TrieMap<String,Integer>();
+    }
 }
