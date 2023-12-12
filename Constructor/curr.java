@@ -1,7 +1,7 @@
 class curr {
     List mylist = new ArrayList();
 
-    curr() {
+    void x() {
         System.out.println("here");
     }
 }
