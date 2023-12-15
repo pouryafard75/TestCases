@@ -1,5 +1,5 @@
 public class testStructure {
     void run(){
-        List<String> myListExplicit = Collections.<String>emptyList();
+        List<Integer> myListExplicit = Collections.<Integer>emptyList();
     }
 }
