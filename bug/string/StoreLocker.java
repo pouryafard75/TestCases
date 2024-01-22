@@ -21,9 +21,9 @@ package org.neo4j.kernel;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.channels.FileLock;
 import java.nio.channels.OverlappingFileLockException;
 
+import org.neo4j.io.fs.FileLock;
 import org.neo4j.io.fs.FileSystemAbstraction;
 import org.neo4j.io.fs.StoreChannel;
 
@@ -33,7 +33,7 @@ import org.neo4j.io.fs.StoreChannel;
 @Deprecated
 public class StoreLocker
 {
-    public static final String STORE_LOCK_FILENAME = "store_lock";
+    public static final String STORE_LOCK_FILENAME = FileLock.STORE_LOCK_FILENAME;
 
     private final FileSystemAbstraction fileSystemAbstraction;
 
@@ -65,32 +65,18 @@ public class StoreLocker
         }
         catch ( IOException e )
         {
-            String message = "Unable to create path for store dir: " + storeDir;
-            throw storeLockException( message, e );
+            throw new StoreLockException( "Unable to create path for store dir: " + storeDir+". Please ensure no other process is using this database, and that the directory is writable (required even for read-only access)", e );
         }
 
         try
         {
             storeLockFileChannel = fileSystemAbstraction.open( storeLockFile, "rw" );
-            storeLockFileLock = storeLockFileChannel.tryLock();
-            if ( storeLockFileLock == null )
-            {
-                String message = "Store and its lock file has been locked by another process: " + storeLockFile;
-                throw storeLockException( message, null );
-            }
+            storeLockFileLock = fileSystemAbstraction.tryLock( storeLockFile, storeLockFileChannel );
         }
         catch ( OverlappingFileLockException | IOException e )
         {
-            String message = "Unable to obtain lock on store lock file: " + storeLockFile;
-            throw storeLockException( message, e );
+            throw new StoreLockException( "Unable to obtain lock on store lock file: " + storeLockFile+". Please ensure no other process is using this database, and that the directory is writable (required even for read-only access)", e );
         }
-    }
-
-    private StoreLockException storeLockException( String message, Exception e )
-    {
-        String help = "Please ensure no other process is using this database, and that the directory is writable " +
-                      "(required even for read-only access)";
-        return new StoreLockException( message + ". " + help, e );
     }
 
     public void release() throws IOException
