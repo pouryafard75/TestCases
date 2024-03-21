@@ -26,8 +26,9 @@ import org.junit.Test;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 
-public class AddMapConfigMessageTaskTest extends ConfigMessageTaskTest {
+public class AddMapConfigMessageTaskTest extends ConfigMessageTaskTest<AddMapConfigMessageTask> {
     @Test
     public void doNotThrowException_whenNullValuesProvidedForNullableFields() {
         MapConfig mapConfig = new MapConfig("my-map");
@@ -82,7 +83,7 @@ public class AddMapConfigMessageTaskTest extends ConfigMessageTaskTest {
                 null,
                 mapConfig.getUserCodeNamespace()
         );
-        AddMapConfigMessageTask addMapConfigMessageTask = new AddMapConfigMessageTask(addMapConfigClientMessage, mockNode, mockConnection);
+        AddMapConfigMessageTask addMapConfigMessageTask = createMessageTask(addMapConfigClientMessage);
         addMapConfigMessageTask.run();
         MapConfig transmittedMapConfig = (MapConfig) addMapConfigMessageTask.getConfig();
         assertEquals(mapConfig, transmittedMapConfig);
@@ -149,7 +150,7 @@ public class AddMapConfigMessageTaskTest extends ConfigMessageTaskTest {
                 null,
                 mapConfig.getUserCodeNamespace()
         );
-        AddMapConfigMessageTask addMapConfigMessageTask = new AddMapConfigMessageTask(addMapConfigClientMessage, mockNode, mockConnection);
+        AddMapConfigMessageTask addMapConfigMessageTask = createMessageTask(addMapConfigClientMessage);
         addMapConfigMessageTask.run();
         MapConfig transmittedMapConfig = (MapConfig) addMapConfigMessageTask.getConfig();
         assertEquals(mapConfig, transmittedMapConfig);
@@ -212,9 +213,15 @@ public class AddMapConfigMessageTaskTest extends ConfigMessageTaskTest {
                 mapConfig.getPartitioningAttributeConfigs(),
                 mapConfig.getUserCodeNamespace()
         );
-        AddMapConfigMessageTask addMapConfigMessageTask = new AddMapConfigMessageTask(addMapConfigClientMessage, mockNode, mockConnection);
+        AddMapConfigMessageTask addMapConfigMessageTask = createMessageTask(addMapConfigClientMessage);
         addMapConfigMessageTask.run();
         MapConfig transmittedMapConfig = (MapConfig) addMapConfigMessageTask.getConfig();
         assertEquals(mapConfig, transmittedMapConfig);
+    }
+
+    @Override
+    protected AddMapConfigMessageTask createMessageTask(ClientMessage clientMessage) {
+        return new AddMapConfigMessageTask(clientMessage, logger, mockNodeEngine, mock(), mockClientEngine, mockConnection,
+                mockNodeExtension, mock(), config, mock());
     }
 }
