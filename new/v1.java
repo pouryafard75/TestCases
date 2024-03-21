@@ -13,66 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.hazelcast.client.impl.protocol.task.dynamicconfig;
-
-import com.hazelcast.client.impl.ClientEngine;
 import com.hazelcast.client.impl.protocol.ClientMessage;
 import com.hazelcast.client.impl.protocol.codec.DynamicConfigAddMapConfigCodec;
-import com.hazelcast.config.CacheDeserializedValues;
-import com.hazelcast.config.Config;
-import com.hazelcast.config.EntryListenerConfig;
-import com.hazelcast.config.InMemoryFormat;
+import com.hazelcast.config.DataPersistenceConfig;
 import com.hazelcast.config.MapConfig;
-import com.hazelcast.config.MapPartitionLostListenerConfig;
-import com.hazelcast.config.MetadataPolicy;
-import com.hazelcast.config.PartitioningStrategyConfig;
-import com.hazelcast.config.QueryCacheConfig;
-import com.hazelcast.instance.BuildInfo;
-import com.hazelcast.instance.impl.Node;
-import com.hazelcast.instance.impl.NodeExtension;
-import com.hazelcast.internal.cluster.impl.ClusterServiceImpl;
-import com.hazelcast.internal.dynamicconfig.DynamicConfigurationAwareConfig;
-import com.hazelcast.internal.nio.Connection;
-import com.hazelcast.internal.serialization.InternalSerializationService;
-import com.hazelcast.logging.ILogger;
-import com.hazelcast.nio.serialization.IdentifiedDataSerializable;
-import com.hazelcast.partition.PartitioningStrategy;
-import com.hazelcast.security.SecurityInterceptorConstants;
-import com.hazelcast.security.permission.ActionConstants;
-import com.hazelcast.security.permission.UserCodeNamespacePermission;
-import com.hazelcast.spi.impl.NodeEngine;
+import com.hazelcast.config.PartitioningAttributeConfig;
+import com.hazelcast.config.TieredStoreConfig;
+import com.hazelcast.memory.Capacity;
+import com.hazelcast.memory.MemoryUnit;
+import org.junit.Test;
+import java.util.Arrays;
 
-import java.security.Permission;
-import java.util.ArrayList;
+import static org.junit.Assert.assertEquals;
 
-    
-        
-          
-    
-
-        
-        Expand All
-    
-    @@ -46,6 +54,13 @@ public AddMapConfigMessageTask(ClientMessage clientMessage, Node node, Connectio
-  
-import java.util.List;
-public class AddMapConfigMessageTask
-        extends AbstractAddConfigMessageTask<DynamicConfigAddMapConfigCodec.RequestParameters> {
-    public AddMapConfigMessageTask(ClientMessage clientMessage, Node node, Connection connection) {
-        super(clientMessage, node, connection);
-    }
-
-    protected AddMapConfigMessageTask(ClientMessage clientMessage, ILogger logger, NodeEngine nodeEngine,
-            InternalSerializationService serializationService, ClientEngine clientEngine, Connection connection,
-            NodeExtension nodeExtension, BuildInfo buildInfo, Config config, ClusterServiceImpl clusterService) {
-        super(clientMessage, logger, nodeEngine, serializationService, clientEngine, connection, nodeExtension, buildInfo,
-                config, clusterService);
-    }
-
-    @Override
-    protected DynamicConfigAddMapConfigCodec.RequestParameters decodeClientMessage(ClientMessage clientMessage) {
-        return DynamicConfigAddMapConfigCodec.decodeRequest(clientMessage);
+public class AddMapConfigMessageTaskTest extends ConfigMessageTaskTest {
+    @Test
+    public void doNotThrowException_whenNullValuesProvidedForNullableFields() {
+        MapConfig mapConfig = new MapConfig("my-map");
 
     
           
@@ -81,111 +39,182 @@ public class AddMapConfigMessageTask
 
           
           Expand Down
+          
+            
     
+
+          
+          Expand Up
     
+    @@ -68,7 +69,7 @@ public void doNotThrowException_whenNullValuesProvidedForNullableFields() {
+  
+        ClientMessage addMapConfigClientMessage = DynamicConfigAddMapConfigCodec.encodeRequest(
+                mapConfig.getName(),
+                mapConfig.getBackupCount(),
+                mapConfig.getAsyncBackupCount(),
+                mapConfig.getTimeToLiveSeconds(),
+                mapConfig.getMaxIdleSeconds(),
+                null,
+                mapConfig.isReadBackupData(),
+                mapConfig.getCacheDeserializedValues().name(),
+                mapConfig.getMergePolicyConfig().getPolicy(),
+                mapConfig.getMergePolicyConfig().getBatchSize(),
+                mapConfig.getInMemoryFormat().name(),
+                null,
+                null,
+                mapConfig.isStatisticsEnabled(),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                mapConfig.getMetadataPolicy().getId(),
+                mapConfig.isPerEntryStatsEnabled(),
+                mapConfig.getDataPersistenceConfig(),
+                mapConfig.getTieredStoreConfig(),
+                null,
+                mapConfig.getUserCodeNamespace()
+        );
+        AddMapConfigMessageTask addMapConfigMessageTask = new AddMapConfigMessageTask(addMapConfigClientMessage, mockNode, mockConnection);
+        addMapConfigMessageTask.run();
+        MapConfig transmittedMapConfig = (MapConfig) addMapConfigMessageTask.getConfig();
+        assertEquals(mapConfig, transmittedMapConfig);
+
+    
+          
+            
+    
+
+          
+          Expand Down
+          
+            
+    
+
+          
+          Expand Up
+    
+    @@ -120,7 +121,7 @@ public void testDataPersistenceAndTieredStoreConfigTransmittedCorrectly() {
   
     }
-    @Override
-    protected ClientMessage encodeResponse(Object response) {
-        return DynamicConfigAddMapConfigCodec.encodeResponse();
+    @Test
+    public void testDataPersistenceAndTieredStoreConfigTransmittedCorrectly() {
+        MapConfig mapConfig = new MapConfig("my-map");
+        DataPersistenceConfig dataPersistenceConfig = new DataPersistenceConfig();
+        dataPersistenceConfig.setEnabled(true);
+        dataPersistenceConfig.setFsync(true);
+        mapConfig.setDataPersistenceConfig(dataPersistenceConfig);
+        TieredStoreConfig tieredStoreConfig = mapConfig.getTieredStoreConfig();
+        tieredStoreConfig.setEnabled(true);
+        tieredStoreConfig.getMemoryTierConfig().setCapacity(Capacity.of(1L, MemoryUnit.GIGABYTES));
+        tieredStoreConfig.getDiskTierConfig().setEnabled(true).setDeviceName("null-device");
+        ClientMessage addMapConfigClientMessage = DynamicConfigAddMapConfigCodec.encodeRequest(
+                mapConfig.getName(),
+                mapConfig.getBackupCount(),
+                mapConfig.getAsyncBackupCount(),
+                mapConfig.getTimeToLiveSeconds(),
+                mapConfig.getMaxIdleSeconds(),
+                null,
+                mapConfig.isReadBackupData(),
+                mapConfig.getCacheDeserializedValues().name(),
+                mapConfig.getMergePolicyConfig().getPolicy(),
+                mapConfig.getMergePolicyConfig().getBatchSize(),
+                mapConfig.getInMemoryFormat().name(),
+                null,
+                null,
+                mapConfig.isStatisticsEnabled(),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                mapConfig.getMetadataPolicy().getId(),
+                mapConfig.isPerEntryStatsEnabled(),
+                mapConfig.getDataPersistenceConfig(),
+                mapConfig.getTieredStoreConfig(),
+                null,
+                mapConfig.getUserCodeNamespace()
+        );
+        AddMapConfigMessageTask addMapConfigMessageTask = new AddMapConfigMessageTask(addMapConfigClientMessage, mockNode, mockConnection);
+        addMapConfigMessageTask.run();
+        MapConfig transmittedMapConfig = (MapConfig) addMapConfigMessageTask.getConfig();
+        assertEquals(mapConfig, transmittedMapConfig);
+
+    
+          
+            
+    
+
+          
+          Expand Down
+          
+            
+    
+
+          
+          Expand Up
+    
+    @@ -168,9 +169,15 @@ public void testPartitioningAttributeConfigsTransmittedCorrectly() {
+  
     }
-    @Override
-    @SuppressWarnings({"checkstyle:npathcomplexity", "checkstyle:cyclomaticcomplexity", "checkstyle:MethodLength"})
-    protected IdentifiedDataSerializable getConfig() {
-        MapConfig config = new MapConfig(parameters.name);
-        config.setAsyncBackupCount(parameters.asyncBackupCount);
-        config.setBackupCount(parameters.backupCount);
-        config.setCacheDeserializedValues(CacheDeserializedValues.valueOf(parameters.cacheDeserializedValues));
-        if (parameters.listenerConfigs != null && !parameters.listenerConfigs.isEmpty()) {
-            config.setEntryListenerConfigs(
-                    (List<EntryListenerConfig>) adaptListenerConfigs(parameters.listenerConfigs, parameters.userCodeNamespace));
-        }
-        if (parameters.merkleTreeConfig != null) {
-            config.setMerkleTreeConfig(parameters.merkleTreeConfig);
-        }
-        if (parameters.eventJournalConfig != null) {
-            config.setEventJournalConfig(parameters.eventJournalConfig);
-        }
-        if (parameters.hotRestartConfig != null) {
-            config.setHotRestartConfig(parameters.hotRestartConfig);
-        }
-        config.setInMemoryFormat(InMemoryFormat.valueOf(parameters.inMemoryFormat));
-        config.setAttributeConfigs(parameters.attributeConfigs);
-        config.setReadBackupData(parameters.readBackupData);
-        config.setStatisticsEnabled(parameters.statisticsEnabled);
-        config.setPerEntryStatsEnabled(parameters.perEntryStatsEnabled);
-        config.setIndexConfigs(parameters.indexConfigs);
-        if (parameters.mapStoreConfig != null) {
-            config.setMapStoreConfig(parameters.mapStoreConfig.asMapStoreConfig(serializationService,
-                    parameters.userCodeNamespace));
-        }
-        config.setTimeToLiveSeconds(parameters.timeToLiveSeconds);
-        config.setMaxIdleSeconds(parameters.maxIdleSeconds);
-        if (parameters.evictionConfig != null) {
-            config.setEvictionConfig(parameters.evictionConfig.asEvictionConfig(serializationService));
-        }
-        if (parameters.mergePolicy != null) {
-            config.setMergePolicyConfig(mergePolicyConfig(parameters.mergePolicy, parameters.mergeBatchSize));
-        }
-        if (parameters.nearCacheConfig != null) {
-            config.setNearCacheConfig(parameters.nearCacheConfig.asNearCacheConfig(serializationService));
-        }
-        config.setPartitioningStrategyConfig(getPartitioningStrategyConfig());
-        if (parameters.partitionLostListenerConfigs != null && !parameters.partitionLostListenerConfigs.isEmpty()) {
-            config.setPartitionLostListenerConfigs(
-                    (List<MapPartitionLostListenerConfig>) adaptListenerConfigs(parameters.partitionLostListenerConfigs,
-                            parameters.userCodeNamespace));
-        }
-        config.setSplitBrainProtectionName(parameters.splitBrainProtectionName);
-        if (parameters.queryCacheConfigs != null && !parameters.queryCacheConfigs.isEmpty()) {
-            List<QueryCacheConfig> queryCacheConfigs = new ArrayList<>(parameters.queryCacheConfigs.size());
-            for (QueryCacheConfigHolder holder : parameters.queryCacheConfigs) {
-                queryCacheConfigs.add(holder.asQueryCacheConfig(serializationService, parameters.userCodeNamespace));
-            }
-            config.setQueryCacheConfigs(queryCacheConfigs);
-        }
-        config.setWanReplicationRef(parameters.wanReplicationRef);
-        config.setMetadataPolicy(MetadataPolicy.getById(parameters.metadataPolicy));
-        if (parameters.isDataPersistenceConfigExists) {
-            config.setDataPersistenceConfig(parameters.dataPersistenceConfig);
-        }
-        if (parameters.isTieredStoreConfigExists) {
-            config.setTieredStoreConfig(parameters.tieredStoreConfig);
-        }
-        if (parameters.isPartitioningAttributeConfigsExists) {
-            config.setPartitioningAttributeConfigs(parameters.partitioningAttributeConfigs);
-        }
-        if (parameters.isUserCodeNamespaceExists) {
-            config.setUserCodeNamespace(parameters.userCodeNamespace);
-        }
-        return config;
-    }
-    private PartitioningStrategyConfig getPartitioningStrategyConfig() {
-        if (parameters.partitioningStrategyClassName != null) {
-            return new PartitioningStrategyConfig(parameters.partitioningStrategyClassName);
-        } else if (parameters.partitioningStrategyImplementation != null) {
-            PartitioningStrategy<?> partitioningStrategy =
-                    serializationService.toObject(parameters.partitioningStrategyImplementation);
-            return new PartitioningStrategyConfig(partitioningStrategy);
-        } else {
-            return null;
-        }
-    }
-    @Override
-    public Permission getUserCodeNamespacePermission() {
-        return parameters.userCodeNamespace != null
-                ? new UserCodeNamespacePermission(parameters.userCodeNamespace, ActionConstants.ACTION_USE) : null;
-    }
-    @Override
-    public String getMethodName() {
-        return SecurityInterceptorConstants.ADD_MAP_CONFIG;
-    }
-    @Override
-    protected boolean checkStaticConfigDoesNotExist(IdentifiedDataSerializable config) {
-        DynamicConfigurationAwareConfig nodeConfig = (DynamicConfigurationAwareConfig) nodeEngine.getConfig();
-        MapConfig mapConfig = (MapConfig) config;
-        return DynamicConfigurationAwareConfig.checkStaticConfigDoesNotExist(
-                nodeConfig.getStaticConfig().getMapConfigs(),
-                mapConfig.getName(), mapConfig);
+    @Test
+    public void testPartitioningAttributeConfigsTransmittedCorrectly() {
+        MapConfig mapConfig = new MapConfig("my-map");
+        mapConfig.setPartitioningAttributeConfigs(Arrays.asList(
+                new PartitioningAttributeConfig("attr1"),
+                new PartitioningAttributeConfig("attr2")
+        ));
+        ClientMessage addMapConfigClientMessage = DynamicConfigAddMapConfigCodec.encodeRequest(
+                mapConfig.getName(),
+                mapConfig.getBackupCount(),
+                mapConfig.getAsyncBackupCount(),
+                mapConfig.getTimeToLiveSeconds(),
+                mapConfig.getMaxIdleSeconds(),
+                null,
+                mapConfig.isReadBackupData(),
+                mapConfig.getCacheDeserializedValues().name(),
+                mapConfig.getMergePolicyConfig().getPolicy(),
+                mapConfig.getMergePolicyConfig().getBatchSize(),
+                mapConfig.getInMemoryFormat().name(),
+                null,
+                null,
+                mapConfig.isStatisticsEnabled(),
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                mapConfig.getMetadataPolicy().getId(),
+                mapConfig.isPerEntryStatsEnabled(),
+                mapConfig.getDataPersistenceConfig(),
+                mapConfig.getTieredStoreConfig(),
+                mapConfig.getPartitioningAttributeConfigs(),
+                mapConfig.getUserCodeNamespace()
+        );
+        AddMapConfigMessageTask addMapConfigMessageTask = new AddMapConfigMessageTask(addMapConfigClientMessage, mockNode, mockConnection);
+        addMapConfigMessageTask.run();
+        MapConfig transmittedMapConfig = (MapConfig) addMapConfigMessageTask.getConfig();
+        assertEquals(mapConfig, transmittedMapConfig);
     }
 }
