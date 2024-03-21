@@ -13,7 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package com.hazelcast.client.impl.protocol.task.dynamicconfig;
+
 import com.hazelcast.client.impl.protocol.ClientMessage;
 import com.hazelcast.client.impl.protocol.codec.DynamicConfigAddMapConfigCodec;
 import com.hazelcast.config.DataPersistenceConfig;
@@ -23,32 +25,15 @@ import com.hazelcast.config.TieredStoreConfig;
 import com.hazelcast.memory.Capacity;
 import com.hazelcast.memory.MemoryUnit;
 import org.junit.Test;
+
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
 
-public class AddMapConfigMessageTaskTest extends ConfigMessageTaskTest<AddMapConfigMessageTask> {
+public class AddMapConfigMessageTaskTest extends ConfigMessageTaskTest {
     @Test
     public void doNotThrowException_whenNullValuesProvidedForNullableFields() {
         MapConfig mapConfig = new MapConfig("my-map");
-
-    
-          
-            
-    
-
-          
-          Expand Down
-          
-            
-    
-
-          
-          Expand Up
-    
-    @@ -68,7 +69,7 @@ public void doNotThrowException_whenNullValuesProvidedForNullableFields() {
-  
         ClientMessage addMapConfigClientMessage = DynamicConfigAddMapConfigCodec.encodeRequest(
                 mapConfig.getName(),
                 mapConfig.getBackupCount(),
@@ -83,28 +68,12 @@ public class AddMapConfigMessageTaskTest extends ConfigMessageTaskTest<AddMapCon
                 null,
                 mapConfig.getUserCodeNamespace()
         );
-        AddMapConfigMessageTask addMapConfigMessageTask = createMessageTask(addMapConfigClientMessage);
+        AddMapConfigMessageTask addMapConfigMessageTask = new AddMapConfigMessageTask(addMapConfigClientMessage, mockNode, mockConnection);
         addMapConfigMessageTask.run();
         MapConfig transmittedMapConfig = (MapConfig) addMapConfigMessageTask.getConfig();
         assertEquals(mapConfig, transmittedMapConfig);
-
-    
-          
-            
-    
-
-          
-          Expand Down
-          
-            
-    
-
-          
-          Expand Up
-    
-    @@ -120,7 +121,7 @@ public void testDataPersistenceAndTieredStoreConfigTransmittedCorrectly() {
-  
     }
+
     @Test
     public void testDataPersistenceAndTieredStoreConfigTransmittedCorrectly() {
         MapConfig mapConfig = new MapConfig("my-map");
@@ -116,6 +85,7 @@ public class AddMapConfigMessageTaskTest extends ConfigMessageTaskTest<AddMapCon
         tieredStoreConfig.setEnabled(true);
         tieredStoreConfig.getMemoryTierConfig().setCapacity(Capacity.of(1L, MemoryUnit.GIGABYTES));
         tieredStoreConfig.getDiskTierConfig().setEnabled(true).setDeviceName("null-device");
+
         ClientMessage addMapConfigClientMessage = DynamicConfigAddMapConfigCodec.encodeRequest(
                 mapConfig.getName(),
                 mapConfig.getBackupCount(),
@@ -150,28 +120,12 @@ public class AddMapConfigMessageTaskTest extends ConfigMessageTaskTest<AddMapCon
                 null,
                 mapConfig.getUserCodeNamespace()
         );
-        AddMapConfigMessageTask addMapConfigMessageTask = createMessageTask(addMapConfigClientMessage);
+        AddMapConfigMessageTask addMapConfigMessageTask = new AddMapConfigMessageTask(addMapConfigClientMessage, mockNode, mockConnection);
         addMapConfigMessageTask.run();
         MapConfig transmittedMapConfig = (MapConfig) addMapConfigMessageTask.getConfig();
         assertEquals(mapConfig, transmittedMapConfig);
-
-    
-          
-            
-    
-
-          
-          Expand Down
-          
-            
-    
-
-          
-          Expand Up
-    
-    @@ -168,9 +169,15 @@ public void testPartitioningAttributeConfigsTransmittedCorrectly() {
-  
     }
+
     @Test
     public void testPartitioningAttributeConfigsTransmittedCorrectly() {
         MapConfig mapConfig = new MapConfig("my-map");
@@ -179,6 +133,7 @@ public class AddMapConfigMessageTaskTest extends ConfigMessageTaskTest<AddMapCon
                 new PartitioningAttributeConfig("attr1"),
                 new PartitioningAttributeConfig("attr2")
         ));
+
         ClientMessage addMapConfigClientMessage = DynamicConfigAddMapConfigCodec.encodeRequest(
                 mapConfig.getName(),
                 mapConfig.getBackupCount(),
@@ -213,15 +168,9 @@ public class AddMapConfigMessageTaskTest extends ConfigMessageTaskTest<AddMapCon
                 mapConfig.getPartitioningAttributeConfigs(),
                 mapConfig.getUserCodeNamespace()
         );
-        AddMapConfigMessageTask addMapConfigMessageTask = createMessageTask(addMapConfigClientMessage);
+        AddMapConfigMessageTask addMapConfigMessageTask = new AddMapConfigMessageTask(addMapConfigClientMessage, mockNode, mockConnection);
         addMapConfigMessageTask.run();
         MapConfig transmittedMapConfig = (MapConfig) addMapConfigMessageTask.getConfig();
         assertEquals(mapConfig, transmittedMapConfig);
-    }
-
-    @Override
-    protected AddMapConfigMessageTask createMessageTask(ClientMessage clientMessage) {
-        return new AddMapConfigMessageTask(clientMessage, logger, mockNodeEngine, mock(), mockClientEngine, mockConnection,
-                mockNodeExtension, mock(), config, mock());
     }
 }
