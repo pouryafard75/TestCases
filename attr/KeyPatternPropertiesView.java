@@ -33,7 +33,7 @@ public class KeyPatternPropertiesView extends AbstractPropertiesTabView<KeyPatte
      * @FXML
      * This annotation marks the {@code bibtexKeyPatternTable} as injectable by JavaFX,
      * meaning that it is automatically populated at runtime with the corresponding
-     * component from the FXML file. This requires that an FXML element with the fx:id
+     * component from the FXML file. modified This requires that an FXML element with the fx:id
      * "bibtexKeyPatternTable" exists and is compatible with the {@link CitationKeyPatternsPanel} type.
      */
     @FXML private CitationKeyPatternsPanel bibtexKeyPatternTable;
