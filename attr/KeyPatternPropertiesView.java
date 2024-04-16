@@ -22,6 +22,20 @@ import jakarta.inject.Inject;
 public class KeyPatternPropertiesView extends AbstractPropertiesTabView<KeyPatternPropertiesViewModel> implements PropertiesTab {
 
     @FXML private Button keyPatternHelp;
+    /**
+     * The panel for managing citation key patterns in a BibTeX database.
+     * 
+     * <p>This UI component allows users to view and edit the citation key patterns
+     * that are used for generating BibTeX keys automatically. Each pattern can be
+     * specified per entry type, enabling customized key generation that adheres to
+     * user preferences or specific citation standards.</p>
+     *
+     * @FXML
+     * This annotation marks the {@code bibtexKeyPatternTable} as injectable by JavaFX,
+     * meaning that it is automatically populated at runtime with the corresponding
+     * component from the FXML file. This requires that an FXML element with the fx:id
+     * "bibtexKeyPatternTable" exists and is compatible with the {@link CitationKeyPatternsPanel} type.
+     */
     @FXML private CitationKeyPatternsPanel bibtexKeyPatternTable;
 
     @Inject private PreferencesService preferencesService;
