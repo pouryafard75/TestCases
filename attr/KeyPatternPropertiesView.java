@@ -22,7 +22,7 @@ import jakarta.inject.Inject;
 public class KeyPatternPropertiesView extends AbstractPropertiesTabView<KeyPatternPropertiesViewModel> implements PropertiesTab {
 
     @FXML private Button keyPatternHelp;
-    @FXML private CitationKeyPatternPanel bibtexKeyPatternTable;
+    @FXML private CitationKeyPatternsPanel bibtexKeyPatternTable;
 
     @Inject private PreferencesService preferencesService;
     @Inject private BibEntryTypesManager bibEntryTypesManager;
