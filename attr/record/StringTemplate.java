@@ -1,13 +1,16 @@
 public class StringTemplate{
-    public String interpolationOfJSONBlock(String feelsLike, String temperature, String unit) {
-    return STR
-      . """
+    public static String interpolationOfJSONBlock(String feelsLike, String temperature, String unit) {
+        return STR
+                . """
       {
         "feelsLike": "\{ feelsLike }",
         "temperature": "\{ temperature }",
         "unit": "\{ unit }"
       }
       """ ;
-      sleep(10);
+    }
+
+    public static void main(String[] args) {
+        interpolationOfJSONBlock("a","b","c");
     }
 }
