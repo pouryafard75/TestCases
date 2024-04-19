@@ -1,5 +1,5 @@
 public class FileWithRecordAsVar{
     void method1(){
-        int record = 12;
+        int record = 13;
     }
 }
