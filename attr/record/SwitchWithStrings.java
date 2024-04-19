@@ -1,4 +1,5 @@
 public class SwitchWithStrings{
+    int X = 10;
     public String getTypeOfDayWithSwitchStatement(String dayOfWeekArg) {
         String typeOfDay;
         switch (dayOfWeekArg) {
