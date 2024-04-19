@@ -5,5 +5,6 @@ public record SemanticViolationRecord(
         String first,
         String second,
         String url,
+        String sayer,
         String filename) {
 }
