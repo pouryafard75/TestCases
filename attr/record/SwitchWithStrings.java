@@ -1,5 +1,5 @@
 public class SwitchWithStrings{
-    int X = 10;
+    int X = 12;
     public String getTypeOfDayWithSwitchStatement(String dayOfWeekArg) {
         String typeOfDay;
         switch (dayOfWeekArg) {
@@ -9,6 +9,7 @@ public class SwitchWithStrings{
             case "Tuesday":
             case "Wednesday":
             case "Thursday":
+            case "Friday":
                 typeOfDay = "Midweek";
                 break;
             default:
