@@ -1,8 +1,8 @@
 public class {
     public void x(){
-        if (!((f1 instanceof Identifier) || (f1 instanceof Tree))
-                && ((f2 instanceof Identifier) || (f2 instanceof Tree))) {
-            throw new VMException("Expecting two functions for while$.");
+        if (!((f1 instanceof BstVMVisitor.Identifier) || (f1 instanceof ParseTree))
+                && ((f2 instanceof BstVMVisitor.Identifier) || (f2 instanceof ParseTree))) {
+            throw new BstVMException("Expecting two functions for while$ (line %d)".formatted(ctx.start.getLine()));
         }
     }
 }
