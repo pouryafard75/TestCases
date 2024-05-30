@@ -1,7 +1,8 @@
 class X
 {
     /**
-     * For a particular task with a copy on a failed host, attempt to find a suitable replica; mark it degraded otherwise
+     * For a particular task with a copy on a failed host, attempt to find a suitable replica; mark it degraded
+     * otherwise
      *
      * @param task           The task to modify
      * @param hosts          A list of available hosts
