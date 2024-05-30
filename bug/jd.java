@@ -16,9 +16,7 @@ public class jd{
 
     // }
 
-    /** 
-     * Start a thread that will perform autobalancing in the background if appropriate to do so 
-    */
+    /** Start a thread that will perform autobalancing in the background if appropriate to do so */
     void d(){
 
     }
