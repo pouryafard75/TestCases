@@ -4,5 +4,8 @@ class po{
         sleep(10);
     }
 
+    void exe(){
+        run();
+    }
     
 }
