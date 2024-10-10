@@ -7,5 +7,7 @@ class po{
     void exe(){
         run(5);
     }
+
+    int a = 10;
     
 }
