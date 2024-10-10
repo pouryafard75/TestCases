@@ -5,7 +5,7 @@ class po{
     }
 
     void exe(){
-        run();
+        run(5);
     }
     
 }
