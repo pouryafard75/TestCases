@@ -5,9 +5,10 @@ class po{
     }
 
     void exe(){
-        run(5);
+        run(52);
     }
 
     int a = 10;
+    int b = 20;
     
 }
