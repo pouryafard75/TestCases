@@ -8,7 +8,6 @@ class po{
         run(52);
     }
 
-    int a = 10;
+    int a = 30;
     int b = 20;           
-    
 }
