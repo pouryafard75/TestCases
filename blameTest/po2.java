@@ -1,4 +1,4 @@
-class po{
+class po2{
     void run(){
         print("hello");
         sleep(10);
