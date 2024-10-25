@@ -1,14 +1,13 @@
 class po2{
     void run(){
-        print("hello");
-        sleep(10);
+        // print("hello");
     }
 
     void exe(){
         run(52);
     }
 
-    int a = 10;
-    int b = 20;           
+    int a = 30;
+    int b = 20;              
     
 }
