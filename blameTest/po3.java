@@ -1,6 +1,7 @@
-class po2{
+class po3{
     void run(){
         // print("hello");
+        print("yes");
     }
 
     void exe(){
