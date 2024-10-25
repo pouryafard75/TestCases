@@ -4,7 +4,7 @@ class po3{
         print("yes");
     }
 
-    void exe(){
+    void exe(){              
         run(52);
     }
 
