@@ -1,6 +1,6 @@
 //and test
 class po3{
-    //test
+    //tests
     void run(){
         // print("hello");
         print("yes");
