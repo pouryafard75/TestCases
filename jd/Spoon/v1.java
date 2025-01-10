@@ -29,8 +29,8 @@ import java.util.Map;
  * @author Jeff Fischer
  */
 public class BasicFieldMetadata extends FieldMetadata {
-    private static final long serialVersionUID = 1L;
-    protected String enumerationClass;
+    private static final long serialVersionUID = 2L;
+    private int a = 2;
     protected Boolean isDerived;
     //@AdminPresentation derived fields
     protected String name;
