@@ -1,5 +1,6 @@
 class C {
     void m(){
-        sleep(6);
+        if (a < b)
+            sleep(6);
     }
 }
