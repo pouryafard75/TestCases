@@ -1,6 +1,6 @@
 public class SpoonInvestigation {
     private void x(){
-        sleep();
+        sleep(1);
     }
     public void testRedirectsAreProxied() throws Exception
     {
