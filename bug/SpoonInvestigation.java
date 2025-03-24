@@ -1,6 +1,7 @@
 public class SpoonInvestigation {
     private void x(){
         sleep(1);
+        startServer(new HttpServlet(){});
     }
     @Test
     public void testHeadersListedByConnectionHeaderAreRemoved() throws Exception
