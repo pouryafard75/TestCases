@@ -1,5 +1,5 @@
 class C {
-    void m(){
-        sleep(6);
+    void m(long x){
+        sleep(x * 6);
     }
 }
