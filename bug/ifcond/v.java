@@ -1,5 +1,5 @@
 class C {
     void m(long x){
-        int x = sleep(x * 6) + run();
+        int x = sleep(x * 6) + run(100 * 4);
     }
 }
