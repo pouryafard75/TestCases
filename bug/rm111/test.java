@@ -1,5 +1,5 @@
 public class test{
     void x(){
-        Unchecked.function(this::parseUsingGrobid);
+        Unchecked.function(parser::parsePlainCitation);
     }
 }
