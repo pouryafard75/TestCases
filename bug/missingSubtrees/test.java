@@ -1,15 +1,15 @@
 package bug.missingSubtrees;
 
-public sealed class test permits A {
-    void X() throws RuntimeException{
+public class test {
+    void X() {
         sleep(3);
     }
 }
-class B extends A {
+class B {
     void m2();
 }
 
-class C implements I {
+class C {
     void m1();
 }
 
