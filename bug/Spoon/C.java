@@ -1,6 +1,6 @@
 class C {
-    void m() {
-        int x = 5;
-        sleep(x);
+    String m() {
+        String ret = "a";
+        return ret;
     }
 }
