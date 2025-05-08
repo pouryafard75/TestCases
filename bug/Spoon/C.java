@@ -1,6 +1,7 @@
 class C {
     String m() {
-        String ret = "a";
+        // comment
+        String ret = "b";
         return ret;
     }
 }
