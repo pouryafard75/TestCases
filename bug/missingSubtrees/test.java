@@ -4,6 +4,6 @@ import java.util.TreeSet;
 
 public sealed class test permits A2 {
     void X(){
-        TreeSet<Keyword> treeSet = new TreeSet<>(tm.values());
+        current[c] = createFileEntry(parent, files[c]);
     }
 }
