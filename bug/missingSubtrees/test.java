@@ -1,14 +1,9 @@
 package bug.missingSubtrees;
 
-public sealed class test permits A2 {
-    void X() throws RuntimeException2{
-        sleep(3);
-    }
-}
-class B extends A2 {
-    void m2();
-}
+import java.util.TreeSet;
 
-class C implements I2 {
-    void m1();
+public sealed class test permits A2 {
+    void X(){
+        TreeSet<Keyword> treeSet = new TreeSet<Keyword>(tm.values());
+    }
 }
