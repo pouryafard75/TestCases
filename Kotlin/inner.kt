@@ -4,7 +4,6 @@ import leakcanary.GcRoot
 import leakcanary.GcRoot.StickyClass
 import leakcanary.HeapDumpMemoryStore
 import leakcanary.HeapValue
-import leakcanary.HeapValue.BooleanValue
 import leakcanary.HeapValue.ByteValue
 import leakcanary.HeapValue.CharValue
 import leakcanary.HeapValue.DoubleValue
